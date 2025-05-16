@@ -12,8 +12,9 @@ public class OBJ_Door extends SuperObject{
             image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/objects/door.png")));
 
         }catch(IOException e){
-            e.printStackTrace();
+            // e.printStackTrace();
         }
+        collision = true;
     }
 
 }
