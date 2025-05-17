@@ -42,8 +42,6 @@ public class GamePanel extends JPanel implements Runnable {
     public Player player = new Player(this, keyH);
     public SuperObject[] obj = new SuperObject[10];
 
-    //
-
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.blue);
@@ -95,17 +93,21 @@ public class GamePanel extends JPanel implements Runnable {
     public void update () {
         player.update();
     }
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+
+        // DEBUG
+        long drawStart = 0;
+        if(keyH.checkDrawTime){
+            drawStart = System.nanoTime();
+        }
+
+
         // TILE
         tileM.draw(g2);
         //OBJECT
-//        for(int i = 0; i < obj.length; i++) { // Цикл 'for' может быть заменен расширенным 'for'
-//           if(obj[i] != null) {
-//               obj[i].draw(g2, this);
-//           }
-//        }
         for (SuperObject superObject : obj) {
             if (superObject != null) {
                 superObject.draw(g2, this);
@@ -116,6 +118,15 @@ public class GamePanel extends JPanel implements Runnable {
 
         // UI
         ui.draw(g2);
+
+        // DEBUG
+        if(keyH.checkDrawTime){
+            long drawEnd = System.nanoTime();
+            long passed = drawEnd - drawStart;
+            g2.setColor(Color.white);
+            g2.drawString("Draw Time:" + passed, 10, 400);
+            System.out.println("Draw Time:" + passed);
+        }
 
         g2.dispose();
     }
