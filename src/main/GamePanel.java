@@ -3,8 +3,10 @@ package main;
 import entity.Player;
 import object.SuperObject;
 import tile.TileManager;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
