@@ -24,10 +24,11 @@ public class NPC_OldMan extends Entity {
         right2 = setup("/NPC/oldman_right_2");
     }
     public void setDialogue() {
-        dialogues[0] = "Hello, lad.";
-        dialogues[1] = "So you've come to this island to \nfind treasure?";
-        dialogues[2] = "I used to be a great wizard but npw ... \nI'm a bit too old for taking an adventure.";
-        dialogues[3] = "Well, good luck on you.";
+
+        dialogues[0] = "Привет, парень.";
+        dialogues[1] = "Так ты прибыл на этот остров\n в поисках сокровищ?";
+        dialogues[2] = "Когда-то я был великим волшебником, \nно теперь ... \nЯ немного староват для приключений.";
+        dialogues[3] = "Что ж, желаю тебе удачи.";
 
     }
     public void setAction() {

@@ -1,12 +1,15 @@
 package main;
 
 import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.DecimalFormat;
+import java.util.Objects;
 
 public class UI {
     GamePanel gp;
     Graphics2D g2;
-    Font arial_40, arial_80B;
+    Font maruMonica, purisaB;
     public boolean messageON = false;
     public String message = "";
     int messageCounter = 0;
@@ -16,9 +19,16 @@ public class UI {
 
     public UI(GamePanel gp) {
         this.gp = gp;
-        arial_40 = new Font("Arial", Font.PLAIN, 40);
-        arial_80B = new Font("Arial", Font.BOLD, 80);
-
+        try {
+            InputStream is = getClass().getResourceAsStream("/font/x12y16pxMaruMonica.ttf");
+            maruMonica = Font.createFont(Font.TRUETYPE_FONT, Objects.requireNonNull(is));
+            is = getClass().getResourceAsStream("/font/Purisa Bold.ttf");
+            purisaB = Font.createFont(Font.TRUETYPE_FONT, Objects.requireNonNull(is));
+        } catch (FontFormatException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void showMessage(String text) {
@@ -28,7 +38,8 @@ public class UI {
 
     public void draw(Graphics2D g2) {
         this.g2 = g2;
-        g2.setFont(arial_40);
+        g2.setFont(maruMonica);
+        // g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setColor(Color.white);
         // PLAY STATE
         if(gp.gameState == gp.playState){
@@ -44,7 +55,7 @@ public class UI {
         }
     }
     public void drawPauseScreen() {
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40F));
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
         String text = "PAUSED";
         int x = getXforCenteredText(text);
         int y = gp.screenHeight / 2;
